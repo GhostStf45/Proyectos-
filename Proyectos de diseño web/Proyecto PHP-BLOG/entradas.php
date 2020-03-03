@@ -1,0 +1,36 @@
+<?php 
+    require_once './assets/includes/cabecera.php';
+?>
+<?php 
+    require_once './assets/includes/lateral.php';
+?>
+ <div id="principal">
+            <h1>Todas las entradas</h1>
+            <?php    
+                $entradas = conseguirEntradas($db, null);
+
+                if(!empty($entradas)):
+                    while($entrada  = mysqli_fetch_assoc($entradas)):
+                        
+            ?>
+                        <article class="entrada">
+                            <a href="entrada.php?id= <?= $entrada['id_entrada']?>">
+                                <h2><?= $entrada['titulo'];?></h2>
+                                <span class="fecha"><?= $entrada['Categoria'].' | '. $entrada['fecha_entrada'] ?></span>
+                                <p>
+                                    <?= substr($entrada['descripcion'], 0, 180).'...';?>
+                                </p>
+                            </a>
+                        </article>
+            <?php
+                    endwhile;    
+                endif;
+            ?>
+            <div id="ver-todas">
+                <a href="entradas.php">Ver todas las entradas</a>
+            </div>
+        </div><!--Fin principal-->
+<?php 
+    require_once './assets/includes/pie.php';
+
+?>
